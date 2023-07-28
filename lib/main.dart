@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => showDatePicker(
                 context: context,
-                initialDate: DateTime.now(),
+                initialDate: DateTime(2000, 5, 13),
                 firstDate: DateTime(1900, 1, 1),
                 lastDate: DateTime(2100, 12, 31))
             .then((value) {
