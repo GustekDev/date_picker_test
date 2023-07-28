@@ -30,16 +30,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  DateTime? _date;
 
   @override
   Widget build(BuildContext context) {
+    var dateString = _date?.toIso8601String().substring(0, 10) ?? "No date selected";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -50,18 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Selected date:',
             ),
             Text(
-              '$_counter',
+              dateString,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () => showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1900, 1, 1),
+                lastDate: DateTime(2100, 12, 31))
+            .then((value) {
+          setState(() {
+            _date = value;
+          });
+        }),
+        tooltip: 'Pick a date',
         child: const Icon(Icons.add),
       ),
     );
