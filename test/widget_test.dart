@@ -13,6 +13,7 @@ void main() {
     await tester.pumpAndSettle();
     var dateDialog = find.byType(DatePickerDialog);
     expect(dateDialog, findsOneWidget);
+    expect(find.text("May 2000"), findsOneWidget);
     await tester.tap(find.bySemanticsLabel("Select year"));
     await tester.pumpAndSettle();
     await tester.tap(find.descendant(
